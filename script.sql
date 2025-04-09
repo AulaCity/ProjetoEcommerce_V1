@@ -1,20 +1,32 @@
-CREATE DATABASE bdEcommerce;
+-- Criando o banco
+create database bdEcommerce;
 
-USE bdEcommerce;
+-- Usando o banco
+use bdEcommerce;
 
-CREATE TABLE Usuario(
-	Id int primary key auto_increment,
-    Nome varchar(50) not null,
-    Email varchar(50) not null,
-    Senha varchar(50) not null
-);
+-- Criando a tabela
+create table Usuario(
+Id int auto_increment,
+Nome varchar (50) not null,
+Email varchar (50) not null,
+Senha Varchar (50) not null,
+primary key (Id));
 
-CREATE TABLE Cliente(
-	CodCli int primary key auto_increment,
-    NomeCli varchar(50) not null,
-    TelCli varchar(20) not null,
-    EmailCli varchar(50) not null
-)
+create table Cliente(
+CodCli int auto_increment,
+NomeCli varchar (50) not null,
+TelCli varchar (20) not null,
+EmailCli varchar (50) not null,
+primary key (CodCli));
 
-SELECT * FROM Usuario;
-SELECT * FROM Cliente;
+create table Produto(
+CodProd int auto_increment,
+NomeProd varchar (50) not null,
+DescProd varchar (100) not null,
+QuantProd int not null,
+PrecoProd varchar (20) not null,
+primary key (CodProd));
+
+Select * from Usuario;
+Select * from Cliente;
+Select * from Produto;
