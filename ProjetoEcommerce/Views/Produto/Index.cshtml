@@ -3,3 +3,57 @@
 *@
 @{
 }
+@model IEnumerable<ProjetoEcommerce.Models.Produto>
+
+<p>
+    <a asp-controller="Produto" asp-action="CadastrarProduto">Cadastra Produto</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CodProd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeProd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescProd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantProd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecoProd)
+            </th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodProd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeProd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescProd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantProd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecoProd)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarCliente", new { id = item.CodProd }) |
+                    @Html.ActionLink("Excluir", "ExcluirCliente", new { id = item.CodProd },
+                             new { onclick = "return confirm('Deseja realmente Excluir este item?');" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
