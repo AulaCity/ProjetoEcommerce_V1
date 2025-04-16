@@ -50,10 +50,10 @@ namespace ProjetoEcommerce.Controllers
 
         /* Action para exibir o formulário de edição de um cliente específico (via Requisição GET)
          Este método recebe o 'id' do cliente a ser editado como parâmetro.*/
-        public IActionResult EditarProduto(int CodProd)
+        public IActionResult EditarProduto(int id)
         {
             // Obtém o cliente específico do repositório usando o ID fornecido.
-            var produto = _produtoRepositorio.ObterProduto(CodProd);
+            var produto = _produtoRepositorio.ObterProduto(id);
 
             // Verifica se o cliente foi encontrado. É uma boa prática tratar casos onde o ID é inválido.
             if (produto == null)
@@ -74,9 +74,9 @@ namespace ProjetoEcommerce.Controllers
         /*[Bind] para especificar explicitamente quais propriedades do objeto Cliente podem ser vinculadas a partir dos dados do formulário.
         Isso é uma boa prática de segurança para evitar o overposting (onde um usuário malicioso pode enviar dados para propriedades
         que você não pretendia que fossem alteradas)*/
-        public IActionResult EditarCliente(int CodProd, [Bind("CodProd, NomeProd, DescProd, QuantProd, PrecoProd")] Produto produto)
+        public IActionResult EditarCliente(int id, [Bind("CodProd,NomeProd,DescProd,QuantProd,PrecoProd")] Produto produto)
         {
-            if (CodProd != produto.CodProd)
+            if (id != produto.CodProd)
             {
                 return BadRequest(); // Retorna um erro 400 se os IDs não corresponderem.
             }
@@ -105,10 +105,10 @@ namespace ProjetoEcommerce.Controllers
         }
 
 
-        public IActionResult ExcluirCliente(int CodProd)
+        public IActionResult ExcluirCliente(int id)
         {
             // Obtém o cliente específico do repositório usando o Codigo fornecido.
-            _produtoRepositorio.Excluir(CodProd);
+            _produtoRepositorio.Excluir(id);
             // Retorna a View de confirmação de exclusão, passando o cliente como modelo.
             return RedirectToAction(nameof(Index));
         }
