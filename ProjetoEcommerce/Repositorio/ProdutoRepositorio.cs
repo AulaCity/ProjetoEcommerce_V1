@@ -22,7 +22,7 @@ namespace ProjetoEcommerce.Repositorio
                     cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = produto.NomeProd;
                     cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = produto.DescProd;
                     cmd.Parameters.Add("@quantidade", MySqlDbType.Int32).Value = produto.QuantProd;
-                    cmd.Parameters.Add("@preco", MySqlDbType.VarChar).Value = produto.PrecoProd;
+                    cmd.Parameters.Add("@preco", MySqlDbType.Decimal).Value = produto.PrecoProd;
 
                     cmd.ExecuteNonQuery();
 
@@ -36,24 +36,23 @@ namespace ProjetoEcommerce.Repositorio
         {
             try
             {
+                // Bloco using para garantir que a conexão seja fechada e os recursos liberados após o uso
                 using (var conexao = new MySqlConnection(_conexaoMySQL))
                 {
+                    // Abre a conexão com o banco de dados MySQL
                     conexao.Open();
+                    // Cria um novo comando SQL para atualizar dados na tabela 'cliente' com base no código
+                    MySqlCommand cmd = new MySqlCommand("UPDATE Produto SET NomeProd=@nome,DescProd=@descricao,QuantProd=@quantidade,PrecoProd=@preco WHERE CodProd=@codigo", conexao);
 
-                    string query = @"UPDATE Produto SET NomeProd = @nome, DescProd = @descricao, QuantProd = @quantidade, PrecoProd = @preco WHERE CodProd = @codigo";
+                    cmd.Parameters.Add("@codigo", MySqlDbType.Int32).Value = produto.CodProd;
+                    cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = produto.NomeProd;
+                    cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = produto.DescProd;
+                    cmd.Parameters.Add("@quantidade", MySqlDbType.Int32).Value = produto.QuantProd;
+                    cmd.Parameters.Add("@preco", MySqlDbType.de).Value = produto.PrecoProd;
 
-                    using (MySqlCommand cmd = new MySqlCommand(query, conexao))
-                    {
-                        cmd.Parameters.Add("@codigo", MySqlDbType.Int32).Value = produto.CodProd;
-                        cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = produto.NomeProd;
-                        cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = produto.DescProd;
-                        cmd.Parameters.Add("@quantidade", MySqlDbType.Int32).Value = produto.QuantProd;
-                        cmd.Parameters.Add("@preco", MySqlDbType.VarChar).Value = produto.PrecoProd;
+                    int linhasAfetadas = cmd.ExecuteNonQuery();
+                    return linhasAfetadas > 0; // Retorna true se ao menos uma linha foi atualizada
 
-                        int linhasAfetadas = cmd.ExecuteNonQuery();
-
-                        return linhasAfetadas > 0;
-                    }
                 }
             }
             catch (MySqlException ex)

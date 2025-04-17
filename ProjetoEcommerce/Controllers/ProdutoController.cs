@@ -74,7 +74,7 @@ namespace ProjetoEcommerce.Controllers
         /*[Bind] para especificar explicitamente quais propriedades do objeto Cliente podem ser vinculadas a partir dos dados do formulário.
         Isso é uma boa prática de segurança para evitar o overposting (onde um usuário malicioso pode enviar dados para propriedades
         que você não pretendia que fossem alteradas)*/
-        public IActionResult EditarCliente(int id, [Bind("CodProd,NomeProd,DescProd,QuantProd,PrecoProd")] Produto produto)
+        public IActionResult EditarProduto(int id, [Bind("CodProd,NomeProd,DescProd,QuantProd,PrecoProd")] Produto produto)
         {
             if (id != produto.CodProd)
             {
@@ -105,7 +105,7 @@ namespace ProjetoEcommerce.Controllers
         }
 
 
-        public IActionResult ExcluirCliente(int id)
+        public IActionResult ExcluirProduto(int id)
         {
             // Obtém o cliente específico do repositório usando o Codigo fornecido.
             _produtoRepositorio.Excluir(id);
