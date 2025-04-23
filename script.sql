@@ -24,9 +24,11 @@ CodProd int auto_increment,
 NomeProd varchar (50) not null,
 DescProd varchar (100) not null,
 QuantProd int not null,
-PrecoProd varchar (20) not null,
+PrecoProd decimal (10,2) not null,
 primary key (CodProd));
 
 Select * from Usuario;
 Select * from Cliente;
 Select * from Produto;
+
+INSERT INTO Usuario (Nome, Email, Senha) VALUES ('admin', 'admin@gmail.com', '123456');

@@ -48,7 +48,7 @@ namespace ProjetoEcommerce.Repositorio
                     cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = produto.NomeProd;
                     cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = produto.DescProd;
                     cmd.Parameters.Add("@quantidade", MySqlDbType.Int32).Value = produto.QuantProd;
-                    cmd.Parameters.Add("@preco", MySqlDbType.de).Value = produto.PrecoProd;
+                    cmd.Parameters.Add("@preco", MySqlDbType.Decimal).Value = produto.PrecoProd;
 
                     int linhasAfetadas = cmd.ExecuteNonQuery();
                     return linhasAfetadas > 0; // Retorna true se ao menos uma linha foi atualizada
